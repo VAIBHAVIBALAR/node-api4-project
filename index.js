@@ -18,7 +18,7 @@ server.use(cors())
 //   res.send(`<h1>UNIT 4 Today's Project</h1>`)
 // })
 
-server.get('/api', (req, res) => {
+server.get('/api/users', (req, res) => {
   res.json({ message: 'Web 45 is awesome!' })
 })
 
