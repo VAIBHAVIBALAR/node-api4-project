@@ -14,9 +14,9 @@ const server = express()
 server.use(express.json())
 server.use(cors())
 
-// server.get('/', (req, res) => {
-//   res.send(`<h1>UNIT 4 Today's Project</h1>`)
-// })
+server.get('/', (req, res) => {
+  res.send(`<h1>UNIT 4 Today's Project</h1>`)
+})
 
 server.get('/api/users', (req, res) => {
   res.json({ message: 'Web 45 is awesome!' })
