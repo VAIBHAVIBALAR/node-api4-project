@@ -1,8 +1,8 @@
 // this allows to stash "artificial env variables" in a file
 require('dotenv').config()
 
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
 
 console.log(process.env.PORT)
 console.log(process.env.API_SECRET)
