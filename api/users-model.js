@@ -1,8 +1,8 @@
 const shortid = require('shortid')
 
 const initializeUsers = () => ([
-  { id: shortid.generate(), name: 'Ed Carter', bio: 'hero' },
-  { id: shortid.generate(), name: 'Mary Edwards', bio: 'super hero' },
+  { id: shortid.generate(), username: 'Quartz', password: 'qwe'},
+  { id: shortid.generate(), username: 'Tommy', password: 'qwe' },
 ])
 
 let users = initializeUsers()
@@ -16,22 +16,13 @@ const findById = id => {
   return Promise.resolve(user)
 }
 
-const insert = ({ name, bio }) => {
-  const newUser = { id: shortid.generate(), name, bio }
+const insert = ({ username, password }) => {
+  const newUser = { id: shortid.generate(), username, password}
   users.push(newUser)
   return Promise.resolve(newUser)
 }
 
-const update = (id, changes) => {
-  const user = users.find(user => user.id === id)
-  if (!user) return Promise.resolve(null)
-
-  const updatedUser = { ...changes, id }
-  users = users.map(d => (d.id === id) ? updatedUser : d)
-  return Promise.resolve(updatedUser)
-}
-
-const resetDB = () => { // ONLY TESTS USE THIS ONE
+const resetDB = () => { 
   users = initializeUsers()
 }
 
@@ -39,6 +30,5 @@ module.exports = {
   find,
   findById,
   insert,
-  update,
-  resetDB, // ONLY TESTS USE THIS ONE
+  resetDB, 
 }

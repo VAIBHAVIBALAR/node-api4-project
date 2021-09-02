@@ -29,6 +29,38 @@ server.get('/api/users', (req, res) => {
     })
 })
 
+server.post('/api/register', (req, res) => {
+    const newUser = req.body
+    User.insert(newUser)
+    .then(user => {
+        if(!user.username || !user.password){
+        res.status(400).json({message: 'Please provide username and password'})
+        } else {
+           res.status(200).json(user)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({message: err.message})
+    })
+})
+
+// server.post('/api/login', (req, res) => {
+//     const username = req.body.username
+//     const password = req.body.password
+
+//     if(username && password) {
+//        const logged =  User.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password])
+//        if(logged){
+//            res.status(200).json({message: 'welcome'})
+//        } else {
+//            res.status(404).json({message: "Authentication failed"})
+//        }
+
+//     }
+
+// })
+
 server.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
 })
