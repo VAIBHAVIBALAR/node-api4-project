@@ -1,5 +1,5 @@
-// this allows to stash "artificial env variables" in a file
 require('dotenv').config()
+const User = require('./api/users-model')
 
 const express = require('express');
 const cors = require('cors');
@@ -19,7 +19,14 @@ server.get('/', (req, res) => {
 })
 
 server.get('/api/users', (req, res) => {
-  res.json({ message: 'Web 45 is awesome!' })
+    User.find()
+    .then(user => {
+        res.status(200).json(user)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({message: err.message})
+    })
 })
 
 server.listen(PORT, () => {
