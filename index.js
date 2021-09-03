@@ -45,21 +45,18 @@ server.post('/api/register', (req, res) => {
     })
 })
 
-// server.post('/api/login', (req, res) => {
-//     const username = req.body.username
-//     const password = req.body.password
-
-//     if(username && password) {
-//        const logged =  User.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password])
-//        if(logged){
-//            res.status(200).json({message: 'welcome'})
-//        } else {
-//            res.status(404).json({message: "Authentication failed"})
-//        }
-
-//     }
-
-// })
+server.post('/api/login', (req, res) => {
+    const userL = req.body
+    if(userL.username && userL.password) {
+       User.insert(userL)
+       .then(user => {
+        res.status(200).json({message: `welcome ${user.username}`})
+       })
+       } else {
+           res.status(404).json({message: "Authentication failed"})
+       }
+       
+})
 
 server.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
